@@ -10,6 +10,7 @@ services:
         condition: service_healthy
     entrypoint: >
       sh -c "python manage.py migrate &&
+             python manage.py createsuperuser --noinput || true &&
              gunicorn mysite.wsgi:application --reload --bind 0.0.0.0:8000"
 
   db:
